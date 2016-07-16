@@ -1,6 +1,8 @@
+import * as types from './actionTypes.js';
+
 export function createCourse(course) {
   return {
-    type: 'CREATE_COURSE',
+    type: types.CREATE_COURSE,
     course: course
   };
 }
