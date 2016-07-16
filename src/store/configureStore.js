@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers/index.js';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import thunk from 'redux-thunk';
 
 export default function configureStore(initialState) {
   // initialState is only used if we want to get initial state from the server or local storage
@@ -9,7 +10,7 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(reduxImmutableStateInvariant()),
+      applyMiddleware(thunk, reduxImmutableStateInvariant()),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
