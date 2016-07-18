@@ -6,7 +6,7 @@ import CourseForm from './CourseForm';
 
 class ManageCoursesPage extends React.Component {
   constructor(props, context) {
-    super(props, context);
+		super(props, context);
 
 		this.state = {
 			course: Object.assign({}, this.props.course),
@@ -15,10 +15,10 @@ class ManageCoursesPage extends React.Component {
   }
 
   render() {
-    return (
+		return (
 			<div>
 				<CourseForm
-					allAuthors={[]}
+					allAuthors={this.props.authors}
 					course={this.state.course}
 					errors={this.state.errors}
 				/>
@@ -28,7 +28,8 @@ class ManageCoursesPage extends React.Component {
 }
 
 ManageCoursesPage.propTypes = {
-	course: PropTypes.object.isRequired
+	course: PropTypes.object.isRequired,
+	authors: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
@@ -40,14 +41,23 @@ function mapStateToProps(state) {
 		length: '',
 		category: ''
 	};
+
+	const authorsFormattedForDropdown = state.authors.map(author => {
+		return {
+			value: author.id,
+			text: author.firstName + ' ' + author.lastName
+		};
+	});
+
   return {
-		course: course
+		course: course,
+		authors: authorsFormattedForDropdown
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(coursesActions, dispatch)
+		actions: bindActionCreators(coursesActions, dispatch)
   };
 }
 
