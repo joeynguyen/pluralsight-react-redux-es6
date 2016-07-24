@@ -20,10 +20,10 @@ class ManageCoursesPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.course.id !== nextProps.course.id) {
-      // Necessary to populate form when existing course is loaded directly
-      this.setState({ course: Object.assign({}, nextProps.course)});
-    }
+		if (this.props.course.id !== nextProps.course.id) {
+			// Necessary to populate form when existing course is loaded directly
+			this.setState({ course: Object.assign({}, nextProps.course)});
+		}
   }
 
 	updateCourseState(event) {
@@ -34,19 +34,19 @@ class ManageCoursesPage extends React.Component {
 	}
 
   saveCourse(event) {
-    event.preventDefault();
-    this.setState({saving: true});
-    this.props.actions.saveCourse(this.state.course)
+		event.preventDefault();
+		this.setState({saving: true});
+		this.props.actions.saveCourse(this.state.course)
       .then(() => this.redirect())
       .catch(error => {
-        toastr.error(error);
-        this.setState({saving: false});
-      });
+				toastr.error(error);
+				this.setState({saving: false});
+			});
   }
   redirect() {
-    this.setState({saving: false});
-    toastr.success('Course saved');
-    this.context.router.push('/courses');
+		this.setState({saving: false});
+		toastr.success('Course saved');
+		this.context.router.push('/courses');
   }
 
   render() {
